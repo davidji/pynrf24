@@ -76,7 +76,7 @@ class NRF24:
     CRC_ENABLED = 0x08
 
     EN_CRC = 0x08
-    CRCO = 0x04
+    CRC0 = 0x04
 
     # Registers
     CONFIG = 0x00
@@ -811,10 +811,10 @@ class NRF24:
 
     def getCRCLength(self):
         result = NRF24.CRC_DISABLED
-        config = self.read_register(NRF24.CONFIG) & (NRF24.CRCO | NRF24.EN_CRC)
+        config = self.read_register(NRF24.CONFIG) & (NRF24.CRC0 | NRF24.EN_CRC)
 
         if config & NRF24.EN_CRC:
-            if config & NRF24.CRCO:
+            if config & NRF24.CRC0:
                 result = NRF24.CRC_16
             else:
                 result = NRF24.CRC_8
